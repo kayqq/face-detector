@@ -64,7 +64,7 @@ class App extends Component {
   componentDidMount() {
     if (localStorage.getItem('token')) {
       const token = localStorage.getItem('token');
-      fetch('https://radiant-lake-23501.herokuapp.com/tokensignin', {
+      fetch('https://face-detector-backend.herokuapp.com/tokensignin', {
             method: 'post',
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify({
@@ -86,7 +86,7 @@ class App extends Component {
     this.props.updateImageUrl(this.props.input);
     
     // Clarifai api call
-    fetch('https://radiant-lake-23501.herokuapp.com/imageurl', {
+    fetch('https://face-detector-backend.herokuapp.com/imageurl', {
       method: 'post',
       headers: {'Content-Type': 'application/json'},
       body: JSON.stringify({
@@ -106,7 +106,7 @@ class App extends Component {
         // if we get a response, then increment
         if (response && this.props.isSignedIn === true) {
           // user entries increment
-          fetch('https://radiant-lake-23501.herokuapp.com/image', {
+          fetch('https://face-detector-backend.herokuapp.com/image', {
             method: 'put',
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify({

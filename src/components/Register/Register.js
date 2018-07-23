@@ -60,7 +60,7 @@ class Register extends React.Component {
         // Simple Validation
         if (this.isEmail(email) && this.isPasswordMatch(password, passwordRetype) && name.length > 0) {
             // Submission
-            fetch('https://radiant-lake-23501.herokuapp.com/register', {
+            fetch('https://face-detector-backend.herokuapp.com/register', {
                 method: 'post',
                 headers: {'Content-Type': 'application/json'},
                 body: JSON.stringify({
