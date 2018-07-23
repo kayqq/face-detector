@@ -64,7 +64,6 @@ class App extends Component {
   componentDidMount() {
     if (localStorage.getItem('token')) {
       const token = localStorage.getItem('token');
-      console.log(token)
       fetch('https://radiant-lake-23501.herokuapp.com/tokensignin', {
             method: 'post',
             headers: {'Content-Type': 'application/json'},
