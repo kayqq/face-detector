@@ -1,0 +1,8 @@
+export const CHANGE_INPUT = 'CHANGE_INPUT';
+export const CHANGE_IMAGEURL = 'CHANGE_IMAGEURL';
+export const CHANGE_FACE_BOXES = 'CHANGE_FACE_BOXES';
+export const LOAD_USER = 'LOAD_USER';
+export const UPDATE_USER_ENTRIES = 'UPDATE_USER_ENTRIES';
+export const CHANGE_ROUTE = 'CHANGE ROUTE';
+export const USER_SIGNIN = 'USER_SIGNIN';
+export const USER_SIGNOUT = 'USER_SIGNOUT';
