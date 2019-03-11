@@ -8,25 +8,21 @@ import './index.css';
 import App from './containers/App';
 import registerServiceWorker from './registerServiceWorker';
 import 'tachyons';
-import { changeInput, changeFaceBoxes, loadUserData, changeImageUrl, changeRoute, changeUserStatus, } from './reducers';
-import { USER_SIGNOUT } from './constants';
+import { loadUserData, authentication } from './reducers';
 
 const logger = createLogger();
 
-const appReducer = combineReducers({ changeInput, changeFaceBoxes, loadUserData, changeImageUrl, changeRoute, changeUserStatus, })
-  
-const rootReducer = (state, action) => {
-    if (action.type === USER_SIGNOUT) {
-        localStorage.removeItem('token');
-        state = undefined
-    }
-    return appReducer(state, action)
-}
+const rootReducer = combineReducers({
+    loadUserData,
+    authentication
+});
 
-const store = createStore(rootReducer, applyMiddleware(thunkMiddleware, logger))
+const store = createStore(rootReducer, applyMiddleware(thunkMiddleware, logger));
 
 ReactDOM.render(
-    <Provider store={store}> 
-    <App />
-    </Provider>, document.getElementById('root'));
+    <Provider store={store}>
+        <App />
+    </Provider>,
+    document.getElementById('root')
+);
 registerServiceWorker();

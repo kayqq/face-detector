@@ -1,29 +1,33 @@
 import React from 'react';
+import history from '../../history';
 
-const Rank = ({isSignedIn, name, entries, changeRoute}) => {
-    if (isSignedIn === true) {
+const Rank = ({ loggedIn, user }) => {
+    if (loggedIn === true && user) {
         return (
             <div>
-                <div className='white f3'>
-                    {`${name}, your current score is...`}
-                </div>
-                <div className='white f1'>
-                    {entries}
-                </div>
+                <div className="white f3">{`${user.name}, your current score is...`}</div>
+                <div className="white f1">{user.entries}</div>
             </div>
-        )
+        );
     } else {
         return (
             <div>
-                <div className='white f3'>
-                    Welcome, please <p onClick={() => changeRoute('signin')} className=" di underline pointer">sign in</p> to log your submissions
+                <div className="white f5">
+                    <p>
+                        Welcome, please{' '}
+                        <span
+                            onClick={() => history.push('signin')}
+                            className="blue di underline pointer"
+                        >
+                            sign in
+                        </span>{' '}
+                        to log your submissions
+                    </p>
                 </div>
-                <div className='white f1'>
-                    Guest Mode
-                </div>
+                <div className="white f1">Guest Mode</div>
             </div>
-        )
+        );
     }
-}
+};
 
 export default Rank;

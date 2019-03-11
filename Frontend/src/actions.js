@@ -1,50 +1,106 @@
-import { 
-    CHANGE_INPUT,
-    CHANGE_FACE_BOXES,
+import API_URL from './config/config';
+import {
     LOAD_USER,
     UPDATE_USER_ENTRIES,
-    CHANGE_IMAGEURL,
-    CHANGE_ROUTE,
-    USER_SIGNIN,
-    USER_SIGNOUT,
+    LOGIN_REQUEST,
+    LOGIN_SUCCESS,
+    LOGIN_FAILURE,
+    LOGOUT
 } from './constants.js';
+import history from './history';
+import { authenticateUser, authenticatetoken, logoutUser } from './services';
 
-export const setInput = (text) => ({
-    type: CHANGE_INPUT,
-    payload: text
-})
+export const updateEntries = userEntries => {
+    return dispatch =>
+        dispatch({
+            type: UPDATE_USER_ENTRIES,
+            payload: userEntries
+        });
+};
 
-export const setImageUrl = (image) => ({
-    type: CHANGE_IMAGEURL,
-    payload: image
-})
+export const tokenLogin = token => {
+    return dispatch => {
+        dispatch({
+            type: LOGIN_REQUEST
+        });
+        authenticatetoken(token)
+            .then(user => {
+                dispatch({ type: LOGIN_SUCCESS, payload: { user } });
+            })
+            .catch(err => dispatch({ type: LOGIN_FAILURE }));
+        history.push('/');
+    };
+};
 
-export const setFaceBoxes = (faceData) => ({
-    type: CHANGE_FACE_BOXES,
-    payload: faceData
-})
+export const login = (email, password) => {
+    return dispatch => {
+        dispatch({
+            type: LOGIN_REQUEST
+        });
+        authenticateUser(email, password)
+            .then(user => {
+                dispatch({ type: LOGIN_SUCCESS, payload: { user } });
+            })
+            .catch(err => dispatch({ type: LOGIN_FAILURE }));
+        history.push('/');
+    };
+};
 
-export const loadUser = (user) => ({
-    type: LOAD_USER,
-    payload: user
-})
+export const logout = () => {
+    return dispatch => {
+        logoutUser();
+        dispatch({
+            type: LOGOUT
+        });
+    };
+};
 
-export const updateEntries = (userEntries) => ({
-    type: UPDATE_USER_ENTRIES,
-    payload: userEntries
-})
+export const incrementEntries = userId => {
+    return dispatch => {
+        fetch(`${API_URL}/image`, {
+            method: 'put',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                id: userId
+            })
+        })
+            .then(response => response.json())
+            .then(userEntries =>
+                dispatch({
+                    type: UPDATE_USER_ENTRIES,
+                    payload: userEntries
+                })
+            )
+            .catch(err => console.log(err));
+    };
+};
 
-export const setRoute = (route) => ({
-    type: CHANGE_ROUTE,
-    payload: route
-})
+export const getFaceData = link => {
+    return fetch(`${API_URL}/imageurl`, {
+        method: 'post',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+            input: link
+        })
+    })
+        .then(response => response.json())
+        .then(faceData => {
+            const clarifaiFace = faceData.outputs[0].data.regions;
+            const image = document.getElementById('inputimage'); // grab id property 'inputimage' from FaceRecognition <img>
+            const width = Number(image.width);
+            const height = Number(image.height);
 
-export const userSignin = () => ({
-    type: USER_SIGNIN,
-})
-
-export const userSignout = () => ({
-    type: USER_SIGNOUT
-})
-
-
+            const arrayOfFaces = clarifaiFace.map(face => {
+                const box = face.region_info.bounding_box;
+                return {
+                    // return object for array
+                    leftCol: box.left_col * width,
+                    topRow: box.top_row * height,
+                    rightCol: width - box.right_col * width,
+                    bottomRow: height - box.bottom_row * height
+                };
+            });
+            return arrayOfFaces;
+        })
+        .catch(err => console.log(err));
+};
