@@ -1,10 +1,9 @@
 import React, { useState } from 'react';
 import './Signin.css';
 
-const SignIn = ({ login, history }) => {
+const SignIn = ({ login, loginError, history }) => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const [error, setError] = useState(false);
 
     const authenticate = () => {
         login(email, password);
@@ -50,7 +49,11 @@ const SignIn = ({ login, history }) => {
                         />
                     </div>
 
-                    {error === true ? <p className="f7 link red">Invalid credentials</p> : <p />}
+                    {loginError === true ? (
+                        <p className="f7 link red">Invalid credentials</p>
+                    ) : (
+                        <p />
+                    )}
 
                     <div className="lh-copy mt3">
                         <p className="f7 link white di">Don't have an account? </p>

@@ -1,22 +1,19 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
-import { createStore, applyMiddleware, combineReducers } from 'redux';
-import { createLogger } from 'redux-logger';
-import thunkMiddleware from 'redux-thunk';
-import './index.css';
 import App from './containers/App';
 import registerServiceWorker from './registerServiceWorker';
+
+// Style
 import 'tachyons';
-import { loadUserData, authentication } from './reducers';
+import './index.css';
 
+// Store
+import thunkMiddleware from 'redux-thunk';
+import { createStore, applyMiddleware } from 'redux';
+import rootReducer from './reducers';
+import { createLogger } from 'redux-logger';
 const logger = createLogger();
-
-const rootReducer = combineReducers({
-    loadUserData,
-    authentication
-});
-
 const store = createStore(rootReducer, applyMiddleware(thunkMiddleware, logger));
 
 ReactDOM.render(

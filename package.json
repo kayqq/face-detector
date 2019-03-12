@@ -1,0 +1,27 @@
+{
+    "name": "face-detector",
+    "version": "1.0.0",
+    "description": "An app that detects human faces on images",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/kayqq/face-detector.git"
+    },
+    "keywords": [
+        "React",
+        "Redux",
+        "React-Router",
+        "Clarifai",
+        "API",
+        "Express",
+        "PostgreSQL"
+    ],
+    "author": "Kenny Quan",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/kayqq/face-detector/issues"
+    },
+    "homepage": "https://github.com/kayqq/face-detector#readme"
+}

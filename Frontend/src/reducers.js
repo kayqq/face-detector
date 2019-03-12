@@ -6,6 +6,8 @@ import {
     UPDATE_USER_ENTRIES
 } from './constants.js';
 
+import { combineReducers } from 'redux';
+
 const initialStateUser = {
     user: {
         id: '',
@@ -16,45 +18,52 @@ const initialStateUser = {
     }
 };
 
-export const loadUserData = (state = initialStateUser, action = {}) => {
+const userReducer = (state = initialStateUser, action = {}) => {
     switch (action.type) {
-        case UPDATE_USER_ENTRIES: // WORK ON THIS
-            return { ...state, user: { ...state.user, entries: action.payload } };
-        default:
-            return state;
-    }
-};
-
-// let user = JSON.parse(localStorage.getItem('user'));
-// const initialStateAuthentication = user ? { loggedIn: true, user } : {};
-
-const initialStateauthentication = {
-    user: {
-        id: '',
-        name: '',
-        email: '',
-        entries: 0,
-        joined: ''
-    }
-};
-
-export const authentication = (state = initialStateauthentication, action) => {
-    switch (action.type) {
-        // case LOGIN_REQUEST:
-        //     return {
-        //         loggingIn: true,
-        //         user: action.user
-        //     };
         case LOGIN_SUCCESS:
             return {
-                loggedIn: true,
                 user: action.payload.user
             };
         case LOGIN_FAILURE:
             return {};
         case LOGOUT:
             return {};
+        case UPDATE_USER_ENTRIES:
+            return { ...state, user: { ...state.user, entries: action.payload } };
         default:
             return state;
     }
 };
+
+const initialStateauthentication = {
+    user: {
+        loggedIn: false,
+        loginError: false
+    }
+};
+
+const authenticationReducer = (state = initialStateauthentication, action) => {
+    switch (action.type) {
+        case LOGIN_SUCCESS:
+            return {
+                loggedIn: true,
+                loginError: false
+            };
+        case LOGIN_FAILURE:
+            return {
+                loggedIn: false,
+                loginError: true
+            };
+        case LOGOUT:
+            return initialStateauthentication;
+        default:
+            return state;
+    }
+};
+
+const rootReducer = combineReducers({
+    userReducer,
+    authenticationReducer
+});
+
+export default rootReducer;

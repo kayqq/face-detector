@@ -31,6 +31,35 @@ export const authenticateUser = (email, password) => {
         })
         .catch(err => console.log(err));
 };
+
 export const logoutUser = () => {
     localStorage.removeItem('token');
+};
+
+export const updateEntries = userId => {
+    return fetch(`${API_URL}/image`, {
+        method: 'put',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+            id: userId
+        })
+    })
+        .then(response => response.json())
+        .then(userEntries => {
+            return userEntries;
+        });
+};
+
+export const getImageData = link => {
+    return fetch(`${API_URL}/imageurl`, {
+        method: 'post',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+            input: link
+        })
+    })
+        .then(response => response.json())
+        .then(imageData => {
+            return imageData;
+        });
 };

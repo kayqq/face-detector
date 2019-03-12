@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import './ImageLinkForm.css';
 
-const ImageLinkForm = ({ onButtonSubmit }) => {
+const ImageLinkForm = ({ handleSubmit }) => {
     const [value, setValue] = useState('');
+
     return (
         <div className="center">
             <div className="form center pa3 br3 shadow-5">
@@ -14,7 +15,10 @@ const ImageLinkForm = ({ onButtonSubmit }) => {
                 />{' '}
                 <button
                     className="w-30 grow f5 link ph3 pv2 dib white bg-purple"
-                    onClick={() => onButtonSubmit(value)}
+                    onClick={() => {
+                        handleSubmit(value);
+                        setValue('');
+                    }}
                 >
                     Detect
                 </button>
