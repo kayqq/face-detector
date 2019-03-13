@@ -36,14 +36,17 @@ const userReducer = (state = initialStateUser, action = {}) => {
 };
 
 const initialStateauthentication = {
-    user: {
-        loggedIn: false,
-        loginError: false
-    }
+    loggingIn: false,
+    loggedIn: false,
+    loginError: false
 };
 
 const authenticationReducer = (state = initialStateauthentication, action) => {
     switch (action.type) {
+        case LOGIN_REQUEST:
+            return {
+                loggingIn: true
+            };
         case LOGIN_SUCCESS:
             return {
                 loggedIn: true,

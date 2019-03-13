@@ -29,6 +29,7 @@ const particlesOptions = {
 const mapStateToProps = state => {
     return {
         user: state.userReducer.user,
+        loggingIn: state.authenticationReducer.loggingIn,
         loggedIn: state.authenticationReducer.loggedIn,
         loginError: state.authenticationReducer.loginError
     };
@@ -55,7 +56,15 @@ class App extends Component {
     }
 
     render() {
-        const { user, loggedIn, loginError, login, logout, incrementEntries } = this.props;
+        const {
+            user,
+            loggedIn,
+            loggingIn,
+            loginError,
+            login,
+            logout,
+            incrementEntries
+        } = this.props;
 
         return (
             <Router history={history}>
@@ -81,7 +90,12 @@ class App extends Component {
                     <Route
                         path="/signin"
                         render={props => (
-                            <SignIn {...props} login={login} loginError={loginError} />
+                            <SignIn
+                                {...props}
+                                login={login}
+                                loggingIn={loggingIn}
+                                loginError={loginError}
+                            />
                         )}
                     />
                     <Route path="/register" render={props => <Register {...props} />} />

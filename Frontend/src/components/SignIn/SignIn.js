@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import './Signin.css';
 
-const SignIn = ({ login, loginError, history }) => {
+const SignIn = ({ login, loggingIn, loginError, history }) => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
 
@@ -42,6 +42,7 @@ const SignIn = ({ login, loginError, history }) => {
                     </fieldset>
                     <div className="">
                         <input
+                            disabled={loggingIn}
                             onClick={() => authenticate()}
                             className="b ph3 pv2 input-reset ba white b--black bg-transparent grow pointer f6 dib"
                             type="submit"
