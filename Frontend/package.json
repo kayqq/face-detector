@@ -2,7 +2,7 @@
     "name": "facerecognitionbrain",
     "version": "0.1.0",
     "private": true,
-    "home": "https://facedetector.kennyquan.com",
+    "home": "https:/facedetector.kennyquan.com",
     "dependencies": {
         "clarifai": "^2.9.0",
         "react": "^16.8.4",
