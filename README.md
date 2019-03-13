@@ -1,6 +1,6 @@
 # Face Detector
 
-An app that helps people communicate with locals and plan pick-up baskbetball games. Utilizes the Face Detection model from [Clarifai API](https://clarifai.com/).
+A game that rewards points based on the amount of human faces submitted. Utilizes the Face Detection model from [Clarifai API](https://clarifai.com/).
 
 <br>
 
@@ -8,7 +8,7 @@ An app that helps people communicate with locals and plan pick-up baskbetball ga
 
 **Libraries:**
 
-Front End: React, Redux, React-Router, [Clarifai](https://www.npmjs.com/package/clarifai)
+Front End: React, Redux, React-Router, [Clarifai](https://www.npmjs.com/package/clarifai)  
 Back End: Express.js, PostgreSQL, [knex.js](https://www.npmjs.com/package/knex), [bcrypt](https://www.npmjs.com/package/bcrypt-nodejs)
 
 <br>
