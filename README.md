@@ -49,7 +49,7 @@ cd my-project
 npm install
 ```
 
-**Update the config with your API key**
+**Add a development config containing your Clarifai API key**
 
 ```
 cd Backend/config/env
