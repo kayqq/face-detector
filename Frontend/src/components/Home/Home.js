@@ -10,6 +10,7 @@ const Home = ({ loggedIn, user, incrementEntries }) => {
     const [faceBoxes, setFaceBoxes] = useState([]);
 
     const handleSubmit = link => {
+        if (!link.length) return;
         setLink(link);
         getImageData(link)
             .then(faceData => {
