@@ -11,6 +11,7 @@ const ImageLinkForm = ({ handleSubmit }) => {
                     id="imagelink"
                     className="f4 pa2 w-70 center"
                     type="text"
+                    value={value}
                     onChange={e => setValue(e.target.value)}
                 />{' '}
                 <button
