@@ -1,3 +1,4 @@
 /.vscode
-/node_modules
 production.js
+node_modules/
+build/
